@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFF5EE</color>
+    <color name="green">#D8BFD8</color>
+
+    <color name="color_default">#DE3163</color>
+    <color name="color_delete">#811331</color>
+    <color name="color_details">#D8BFD8</color>
+
+    <color name="color_status_todo">#E37383</color>
+    <color name="color_status_done">#9F2B68</color>
+</resources>
