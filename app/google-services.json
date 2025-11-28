@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "319407130402",
+    "project_id": "taskapp-cf558",
+    "storage_bucket": "taskapp-cf558.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319407130402:android:c307c02d6c52f35d85477b",
+        "android_client_info": {
+          "package_name": "com.annaclara.kanban"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCiF9rdo1PNg6-sK7C6d2S4P77hXlYMA6U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

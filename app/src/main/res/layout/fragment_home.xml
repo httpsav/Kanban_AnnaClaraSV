@@ -46,7 +46,7 @@
                 android:background="@color/color_default"
                 android:contentDescription="Logout"
                 android:padding="24dp"
-                android:src="@drawable/logoutic"
+                android:src="@drawable/ic_back"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 

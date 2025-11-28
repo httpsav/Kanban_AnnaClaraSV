@@ -6,13 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
+import com.annaclara.kanban.R
 import com.annaclara.kanban.databinding.FragmentRegisterBinding
-import com.annaclara.kanban.ui.initToolbar
+import com.google.firebase.auth.FirebaseAuth
+
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var auth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,32 +28,69 @@ class RegisterFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initToolbar(binding.toolbar)
-        validateData()
-    }
+        initListener()
 
-    private fun validateData() {
+    }
+    private fun validateData(){
         val email = binding.editEmail.text.toString().trim()
         val senha = binding.editSenha.text.toString().trim()
 
-        if (email.isNotBlank()) {
-            if (senha.isNotBlank()) {
-                Toast.makeText(requireContext(), "Tudo OK!", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), "Preencha uma senha!", Toast.LENGTH_SHORT).show()
-            }
-        } else {
-            Toast.makeText(requireContext(), "Preencha um email válido!", Toast.LENGTH_SHORT).show()
+        if (email.isNotBlank() and senha.isNotBlank()){
+            binding.progressBar.isVisible = true
+            registerUser(email, senha)
+            Toast.makeText(
+                requireContext(),
+                "entrou1",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+        else{
+            Toast.makeText(
+                requireContext(),
+                "Erro email ou senha vazios",
+                Toast.LENGTH_SHORT
+            ).show()
+
+        }
+    }
+
+    private fun initListener(){
+        binding.btnRegister.setOnClickListener {
+            validateData()
+        }
+    }
+
+    private fun registerUser(email: String, password: String){
+
+        try {
+
+            auth = FirebaseAuth.getInstance()
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        //mensagem de sucesso
+                        findNavController().navigate(R.id.action_global_homeFragment)
+                    } else {
+                        //mensagem de erro
+                        Toast.makeText(
+                            requireContext(),
+                            task.exception?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+        }
+        catch (e: Exception){
+            Toast.makeText(requireContext(), e.message.toString(), Toast.LENGTH_SHORT).show()
         }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
-
     }
 
 }
